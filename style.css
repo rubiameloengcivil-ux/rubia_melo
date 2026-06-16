@@ -1,0 +1,340 @@
+/* --- Cores e Identidade Visual --- */
+:root {
+    --marrom-escuro: #4A3024;
+    --marrom: #6D4C41;
+    --marrom-claro: #A1887F;
+    --bege: #F5EFE7;
+    --bege-claro: #FBF8F4;
+}
+
+/* --- Reset Global --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, serif;
+    background-color: var(--bege);
+    color: var(--marrom-escuro);
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("imagens/fundo-sepia.png");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.12;
+    z-index: -1;
+}
+
+.container {
+    max-width: 1400px;
+    margin: auto;
+    padding: 40px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 40px;
+    border-bottom: 3px solid var(--marrom);
+    padding-bottom: 30px;
+}
+
+.cabecalho-texto {
+    flex: 1;
+}
+
+h1 {
+    font-size: 2.6rem;
+    color: var(--marrom-escuro);
+}
+
+h2 {
+    color: var(--marrom);
+    letter-spacing: 4px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.foto img {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 6px solid var(--marrom);
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 40px;
+}
+
+/* --- Coluna Esquerda (Cards) --- */
+.coluna-esquerda {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.92);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.card h3 {
+    color: var(--marrom);
+    margin-bottom: 15px;
+}
+
+.card ul {
+    padding-left: 20px;
+}
+
+.card li {
+    margin-bottom: 8px;
+}
+
+.skill {
+    margin-bottom: 15px;
+}
+
+.barra {
+    margin-top: 5px;
+    height: 10px;
+    background: #e5d8cf;
+    border-radius: 20px;
+}
+
+.nivel {
+    height: 10px;
+    background: var(--marrom);
+    border-radius: 20px;
+}
+
+/* --- LINHA DO TEMPO CRONOLÓGICA (COMPUTADOR) --- */
+.timeline-real {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    grid-auto-rows: 95px; 
+    align-items: stretch;
+}
+
+/* Linha Física Central */
+.timeline-real::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--marrom);
+    z-index: 1;
+}
+
+/* Configuração Geral dos Marcos */
+.marco {
+    position: relative;
+    display: flex;
+    z-index: 2;
+    grid-row-start: calc(var(--inicio) - var(--ano-base) + 1);
+    grid-row-end: calc(var(--fim) - var(--ano-base) + 1);
+}
+
+/* Pequena bolinha central para indicar o ponto da escala */
+.marco::before {
+    content: "";
+    position: absolute;
+    top: 18px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--marrom);
+    border: 2px solid var(--bege);
+    z-index: 3;
+}
+
+.marco.esquerda {
+    grid-column: 1;
+    padding-right: 35px;
+    justify-content: flex-end;
+}
+.marco.esquerda::before { right: -5px; }
+
+.marco.direita {
+    grid-column: 2;
+    padding-left: 35px;
+    justify-content: flex-start;
+}
+.marco.direita::before { left: -5px; }
+
+/* --- BALÕES TRADICIONAIS (ESTUDOS E EXPERIÊNCIAS) --- */
+.balao {
+    padding: 15px 22px;
+    border-radius: 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.balao span {
+    font-weight: bold;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+}
+
+.balao h4 {
+    font-size: 1.15rem;
+    margin-bottom: 4px;
+}
+
+.balao p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Estilo: Experiência Profissional (Amarronzado transparente) */
+.balao.experiencia {
+    background: rgba(109, 76, 65, 0.12); 
+    border-left: 5px solid var(--marrom);
+}
+.balao.experiencia h4, .balao.experiencia p { color: var(--marrom-escuro); }
+.balao.experiencia span { color: var(--marrom); }
+
+/* Estilo: Estudos (Bege bem claro) */
+.balao.estudos {
+    background: rgba(251, 248, 254, 0.96); 
+    border-left: 5px solid var(--marrom-claro);
+}
+.balao.estudos h4, .balao.estudos p { color: var(--marrom-escuro); }
+.balao.estudos span { color: var(--marrom-claro); }
+
+
+/* --- DESIGN MINIMALISTA (TEXTO LIVRE PRÓXIMO À LINHA) --- */
+.texto-livre {
+    align-self: start;
+    margin-top: 10px;
+    font-family: Georgia, serif;
+    width: 100%;
+    max-width: 400px;
+    z-index: 4;
+}
+
+/* Alinhamento fino para textos na esquerda e na direita */
+.marco.esquerda .texto-livre {
+    text-align: right;
+}
+.marco.direita .texto-livre {
+    text-align: left;
+}
+
+/* Estilização para o Casamento e Filhas (Apenas Texto e Coração Marrom) */
+.texto-livre.pessoal {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: var(--marrom); 
+    letter-spacing: 0.5px;
+}
+
+/* Estilização para os Destaques Acadêmicos (Apenas Texto e Estrelas Ouro) */
+.texto-livre.destaques h5 {
+    font-size: 1.1rem;
+    color: #b38f19; 
+    margin-bottom: 5px;
+}
+
+.lista-estrelas-limpa {
+    list-style: none;
+    padding: 0;
+}
+
+.lista-estrelas-limpa li {
+    font-size: 0.9rem;
+    color: var(--marrom-escuro);
+    margin-bottom: 4px;
+    opacity: 0.9;
+}
+
+
+/* ==========================================================================
+   --- NOVO BLOCO ADICIONADO: MEDIA QUERY PARA CELULARES (Telas até 768px) ---
+   ========================================================================== */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px; /* Reduz o espaçamento das bordas para ganhar tela */
+    }
+
+    header {
+        flex-direction: column-reverse; /* Foto fica acima do nome no celular */
+        text-align: center;
+        gap: 20px;
+    }
+
+    .foto img {
+        width: 160px; /* Reduz um pouco a foto para caber melhor */
+        height: 160px;
+    }
+
+    h1 {
+        font-size: 1.9rem; /* Diminui o título para não quebrar linhas de forma feia */
+    }
+
+    h2 {
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+    }
+
+    .layout {
+        grid-template-columns: 1fr; /* Quebra as duas colunas em uma coluna única vertical */
+        gap: 30px;
+    }
+
+    /* --- Ajuste da Linha do Tempo no Celular --- */
+    .timeline-real {
+        grid-template-columns: 1fr; /* Transforma a grade em coluna única */
+        grid-auto-rows: 105px; /* Aumenta levemente a escala para os textos não colidirem */
+    }
+
+    /* Move a linha física central para o canto esquerdo */
+    .timeline-real::before {
+        left: 15px;
+        transform: none;
+    }
+
+    /* Força TODOS os marcos a se alinharem na coluna da direita */
+    .marco.esquerda, .marco.direita {
+        grid-column: 1;
+        padding-left: 40px;
+        padding-right: 0;
+        justify-content: flex-start;
+    }
+
+    /* Reposiciona as bolinhas indicadoras sobre a nova posição da linha */
+    .marco.esquerda::before, .marco.direita::before {
+        left: 10px;
+        right: auto;
+    }
+
+    /* Força todos os textos minimalistas a alinharem à esquerda */
+    .marco.esquerda .texto-livre, .marco.direita .texto-livre {
+        text-align: left;
+    }
+}
